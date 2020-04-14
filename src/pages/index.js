@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import Helmet from "react-helmet";
-import L from "leaflet";
+import { L } from "leaflet";
 import axios from "axios";
 
 import Layout from "components/Layout";
