@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import Helmet from "react-helmet";
-import { L } from "leaflet";
 import axios from "axios";
 
 import Layout from "components/Layout";
@@ -9,6 +8,7 @@ import Map from "components/Map";
 
 import "typeface-roboto";
 import TotalCard from "components/TotalCard";
+import L from "leaflet";
 
 const API_URL = "https://corona.lmao.ninja";
 
