@@ -41,14 +41,14 @@
   position: relative;
   justify-content: center;
   align-items: center;
-  color: white;
-  width: 3.6em;
-  height: 3.6em;
+  color: black;
+  // width: 10em;
+  // height: 10em;
   font-size: .7em;
   font-weight: bold;
-  background-color: $red-800;
+  background-color: rgba(216, 10, 10, 0.6);
   border-radius: 100%;
-  box-shadow: 0 2px 5px rgba(black, .9);
+  box-shadow: 0 2px 5px rgba(black, 0.6);
 
   &:hover {
 
@@ -66,6 +66,7 @@
   position: absolute;
   bottom: 100%;
   width: 16em;
+  color: white;
   font-size: 1.4em;
   padding: 1em;
   background-color: $blue-grey-900;

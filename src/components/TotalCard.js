@@ -1,5 +1,5 @@
 import React from "react";
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
@@ -13,8 +13,8 @@ const useStyles = () => ({
     flexGrow: 1,
   },
   cardItem: {
-    margin: 5
-  }
+    margin: 5,
+  },
 });
 
 class SimpleCard extends React.Component {
@@ -50,7 +50,6 @@ class SimpleCard extends React.Component {
   };
 
   render() {
-
     const { classes } = this.props;
     const data = this.state.worldwide;
 
@@ -83,19 +82,19 @@ class SimpleCard extends React.Component {
                 {data.recovered}
               </Typography>
             </Grid>
-						<Grid className={classes.cardItem} item xs>
+            <Grid className={classes.cardItem} item xs>
               <Typography color="textSecondary">Active</Typography>
               <Typography variant="h5" component="h5">
                 {data.active}
               </Typography>
             </Grid>
-						<Grid className={classes.cardItem} item xs>
+            <Grid className={classes.cardItem} item xs>
               <Typography color="textSecondary">Today Cases</Typography>
               <Typography variant="h5" component="h5">
                 {data.todayCases}
               </Typography>
             </Grid>
-						<Grid className={classes.cardItem} item xs>
+            <Grid className={classes.cardItem} item xs>
               <Typography color="textSecondary">Today Deaths</Typography>
               <Typography variant="h5" component="h5">
                 {data.todayDeaths}

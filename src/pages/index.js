@@ -17,7 +17,7 @@ const LOCATION = {
   lng: 0,
 };
 const CENTER = [LOCATION.lat, LOCATION.lng];
-const DEFAULT_ZOOM = 2;
+const DEFAULT_ZOOM = 2.8;
 const ZOOM = 10;
 
 const timeToZoom = 2000;
@@ -38,6 +38,7 @@ const IndexPage = () => {
     }
 
     const { data = [] } = response;
+    console.log(data);
 
     const hasData = Array.isArray(data) && data.length > 0;
 
@@ -66,6 +67,7 @@ const IndexPage = () => {
         const { properties = {} } = feature;
         let updatedFormatted;
         let casesString;
+        let circleSize;
     
         const {
           country,
@@ -84,9 +86,12 @@ const IndexPage = () => {
         if ( updated ) {
           updatedFormatted = new Date(updated).toLocaleString();
         }
+
+        // Calculate cirle size
+        circleSize = Math.sqrt(cases);
     
         const html = `
-          <span class="icon-marker">
+          <span style="width: ${circleSize}%; height: ${circleSize}%" class="icon-marker">
             <span class="icon-marker-tooltip">
               <h2>${country}</h2>
               <ul>
