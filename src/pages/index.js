@@ -24,7 +24,7 @@ const timeToZoom = 2000;
 const timeToOpenPopupAfterZoom = 4000;
 const timeToUpdatePopupAfterZoom = timeToOpenPopupAfterZoom + 3000;
 
-var geoJsonLayers = new L.GeoJSON(null);
+var geoJsonLayers = L.geoJSON(null);
 
 const IndexPage = () => {
   geoJsonLayers.clearLayers();
