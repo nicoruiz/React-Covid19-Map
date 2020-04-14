@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "gatsby";
+import { Link, navigate } from "gatsby";
+
 
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -39,21 +40,6 @@ const Header = () => {
       </AppBar>
     </div>
   );
-  // return (
-  //   <header>
-  //     <Container type="content">
-  //       <p>Coronavirus (COVID-19)</p>
-  //       <ul>
-  //         <li>
-  //           <Link to="/">Map</Link>
-  //         </li>
-  //         <li>
-  //           <Link to="/page-2/">Dashboard</Link>
-  //         </li>
-  //       </ul>
-  //     </Container>
-  //   </header>
-  // );
 };
 
 export default Header;

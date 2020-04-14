@@ -24,10 +24,7 @@ const timeToZoom = 2000;
 const timeToOpenPopupAfterZoom = 4000;
 const timeToUpdatePopupAfterZoom = timeToOpenPopupAfterZoom + 3000;
 
-var geoJsonLayers = L.geoJSON(null);
-
 const IndexPage = () => {
-  geoJsonLayers.clearLayers();
   // Get and fills the map
   async function mapEffect({ leafletElement: map } = {}) {
 
@@ -65,7 +62,7 @@ const IndexPage = () => {
       }),
     };
 
-    geoJsonLayers = new L.GeoJSON(geoJson, {
+    const geoJsonLayers = new L.GeoJSON(geoJson, {
       pointToLayer: (feature = {}, latlng) => {
         const { properties = {} } = feature;
         let updatedFormatted;
