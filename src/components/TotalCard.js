@@ -13,7 +13,8 @@ const useStyles = () => ({
     flexGrow: 1,
   },
   cardItem: {
-    margin: 5,
+    flexGrow: 1,
+    padding: 5,
   },
 });
 
@@ -61,6 +62,9 @@ class SimpleCard extends React.Component {
         raised={this.state.raised}
       >
         <CardHeader title="Total Worldwide" />
+        <Typography variant="subtitle2" color="textSecondary">
+          Last Updated: {new Date(data.updated).toLocaleString()}
+        </Typography>
         <Divider />
         <CardContent>
           <Grid container className={classes.root}>

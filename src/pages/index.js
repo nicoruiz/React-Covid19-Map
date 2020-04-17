@@ -10,7 +10,7 @@ import "typeface-roboto";
 import TotalCard from "components/TotalCard";
 import L from "leaflet";
 
-const API_URL = "https://corona.lmao.ninja";
+const API_URL = "https://corona.lmao.ninja/v2";
 
 const LOCATION = {
   lat: 0,
@@ -82,7 +82,7 @@ const IndexPage = () => {
         }
 
         // Calculate cirle size
-        circleSize = Math.sqrt(cases);
+        circleSize = Math.sqrt(cases) * 1.5;
 
         const html = `
           <span style="width: ${circleSize}%; height: ${circleSize}%" class="icon-marker">
