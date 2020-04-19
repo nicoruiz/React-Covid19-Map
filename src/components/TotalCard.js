@@ -7,6 +7,7 @@ import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import axios from "axios";
 import { Grid } from "@material-ui/core";
+import * as worldwideProvider from "../providers/worldwide.js";
 
 const useStyles = () => ({
   root: {
@@ -19,35 +20,25 @@ const useStyles = () => ({
 });
 
 class SimpleCard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+  state = {
       worldwide: {},
-      raised: false,
-    };
+      raised: false
+  }
+
+  componentDidMount() {
     this.getWorldwide();
   }
 
   toggleRaised = () => {
     this.setState({
-      raised: !this.state.raised,
+      raised: !this.state.raised
     });
   };
 
-  getWorldwide = async () => {
-    let response;
-
-    try {
-      response = await axios.get(`${this.props.api_url}/all`);
-    } catch (e) {
-      console.log(`Failed to fetch all data: ${e.message}`, e);
-      return;
-    }
-    console.log(response.data);
-
-    this.setState({
-      worldwide: response.data,
-    });
+  getWorldwide = () => {
+    worldwideProvider.get().then(res => {
+      this.setState({ worldwide: res });
+    })
   };
 
   render() {
@@ -63,7 +54,7 @@ class SimpleCard extends React.Component {
       >
         <CardHeader title="Total Worldwide" />
         <Typography variant="subtitle2" color="textSecondary">
-          Last Updated: {new Date(data.updated).toLocaleString()}
+          Last Update: {new Date(data.updated).toLocaleString()}
         </Typography>
         <Divider />
         <CardContent>
