@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import Helmet from "react-helmet";
 import axios from "axios";
 
@@ -17,14 +17,11 @@ const LOCATION = {
   lng: 0,
 };
 const CENTER = [LOCATION.lat, LOCATION.lng];
-const DEFAULT_ZOOM = 2;
-const ZOOM = 10;
-
-const timeToZoom = 2000;
-const timeToOpenPopupAfterZoom = 4000;
-const timeToUpdatePopupAfterZoom = timeToOpenPopupAfterZoom + 3000;
+const DEFAULT_ZOOM = 3;
 
 const IndexPage = () => {
+  const [mapData, setMapData] = useState({});
+
   // Get and fills the map
   async function mapEffect({ leafletElement: map } = {}) {
 
@@ -48,11 +45,12 @@ const IndexPage = () => {
       type: "FeatureCollection",
       features: data.map((country = {}) => {
         const { countryInfo = {} } = country;
-        const { lat, long: lng } = countryInfo;
+        const { lat, long: lng, flag } = countryInfo;
         return {
           type: "Feature",
           properties: {
             ...country,
+            flag: flag
           },
           geometry: {
             type: "Point",
@@ -69,7 +67,7 @@ const IndexPage = () => {
         let casesString;
         let circleSize;
 
-        const { country, updated, cases, deaths, recovered } = properties;
+        const { country, updated, cases, deaths, recovered, flag } = properties;
 
         casesString = `${cases}`;
 
@@ -87,7 +85,7 @@ const IndexPage = () => {
         const html = `
           <span style="width: ${circleSize}%; height: ${circleSize}%" class="icon-marker">
             <span class="icon-marker-tooltip">
-              <h2>${country}</h2>
+              <h2>${country} <img src=${flag}></h2>
               <ul>
                 <li><strong>Confirmed:</strong> ${cases}</li>
                 <li><strong>Deaths:</strong> ${deaths}</li>
@@ -117,6 +115,8 @@ const IndexPage = () => {
     defaultBaseMap: "OpenStreetMap",
     zoom: DEFAULT_ZOOM,
     mapEffect,
+    minZoom: 2,
+    maxZoom: 5
   };
 
   return (

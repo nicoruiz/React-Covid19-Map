@@ -34,7 +34,7 @@ const Header = () => {
             <Link to="/">Map</Link>
           </Button>
           <Button color="inherit">
-            <Link to="/page-2/">Dashboard</Link>
+            <Link to="/dashboard/">Dashboard</Link>
           </Button>
         </Toolbar>
       </AppBar>
