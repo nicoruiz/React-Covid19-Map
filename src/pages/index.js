@@ -1,16 +1,14 @@
-import React, { useState } from "react";
-import Helmet from "react-helmet";
-import axios from "axios";
-
-import Layout from "components/Layout";
+import favicon from '../../favicon.ico';
 import Container from "components/Container";
+import Layout from "components/Layout";
 import Map from "components/Map";
-
-import "typeface-roboto";
 import TotalCard from "components/TotalCard";
 import L from "leaflet";
-
-const API_URL = "https://corona.lmao.ninja/v2";
+import React, { useEffect, useState } from "react";
+import Helmet from "react-helmet";
+import "typeface-roboto";
+import Spinner from "../components/Spinner";
+import * as countriesProvider from "../providers/countries.js";
 
 const LOCATION = {
   lat: 0,
@@ -20,22 +18,23 @@ const CENTER = [LOCATION.lat, LOCATION.lng];
 const DEFAULT_ZOOM = 3;
 
 const IndexPage = () => {
-  const [mapData, setMapData] = useState({});
+  const [mapData, setMapData] = useState([]);
+
+  // This function is called every time the component initializes
+  useEffect(() => {
+    getMapData();
+  }, []);
+
+  const getMapData = () => {
+    countriesProvider.get().then(data => {
+      setMapData(data);
+    });
+  }
 
   // Get and fills the map
-  async function mapEffect({ leafletElement: map } = {}) {
+  function mapEffect({ leafletElement: map } = {}) {
 
-    let response;
-
-    try {
-      response = await axios.get(`${API_URL}/countries`);
-    } catch (e) {
-      console.log(`Failed to fetch countries: ${e.message}`, e);
-      return;
-    }
-
-    const { data = [] } = response;
-    console.log(data);
+    const data = mapData;
 
     const hasData = Array.isArray(data) && data.length > 0;
 
@@ -123,13 +122,17 @@ const IndexPage = () => {
     <Layout pageName="home">
       <Helmet>
         <title>Covid-19 Map Page</title>
+        <link rel="shortcut icon" type="image/png" href={favicon} />
       </Helmet>
-
-      <Map {...mapSettings}></Map>
-
-      <Container type="content" className="text-center home-start">
-        <TotalCard api_url={API_URL} />
-      </Container>
+      {mapData.length === 0 ?
+        <Spinner /> :
+        <>
+          <Map {...mapSettings}></Map>
+          <Container type="content" className="text-center home-start">
+            <TotalCard />
+          </Container>
+        </>
+      }
     </Layout>
   );
 };
