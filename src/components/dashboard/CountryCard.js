@@ -12,8 +12,7 @@ const useStyles = () => ({
     flexGrow: 1,
   },
   cardItem: {
-    flexGrow: 1,
-    padding: 5,
+    flexGrow: 1
   },
   flag: {
     height: '100%',
@@ -57,7 +56,7 @@ class CountryCard extends React.Component {
         />
         <Divider />
         <CardContent>
-          <Grid container className={classes.root}>
+          <Grid container className={classes.root} spacing={3}>
             <Grid className={classes.cardItem} item xs>
               <Typography color="textSecondary">Cases</Typography>
               <Typography variant="h5" component="h5">
