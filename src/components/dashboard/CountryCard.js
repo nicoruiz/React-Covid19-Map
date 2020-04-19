@@ -5,8 +5,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
-import { Grid } from "@material-ui/core";
-import * as worldwideProvider from "../providers/worldwide.js";
+import { Grid, CardMedia, Avatar } from "@material-ui/core";
 
 const useStyles = () => ({
   root: {
@@ -16,16 +15,15 @@ const useStyles = () => ({
     flexGrow: 1,
     padding: 5,
   },
+  flag: {
+    height: '100%',
+    widht: '100%'
+  }
 });
 
-class SimpleCard extends React.Component {
+class CountryCard extends React.Component {
   state = {
-      worldwide: {},
-      raised: false
-  }
-
-  componentDidMount() {
-    this.getWorldwide();
+    raised: false
   }
 
   toggleRaised = () => {
@@ -34,15 +32,9 @@ class SimpleCard extends React.Component {
     });
   };
 
-  getWorldwide = () => {
-    worldwideProvider.get().then(res => {
-      this.setState({ worldwide: res });
-    })
-  };
-
   render() {
     const { classes } = this.props;
-    const data = this.state.worldwide;
+    const country = this.props.country;
 
     return (
       <Card
@@ -51,47 +43,61 @@ class SimpleCard extends React.Component {
         className={classes.root}
         raised={this.state.raised}
       >
-        <CardHeader title="Total Worldwide" />
-        <Typography variant="subtitle2" color="textSecondary">
-          Last Update: {new Date(data.updated).toLocaleString()}
-        </Typography>
+        <CardHeader
+          avatar={
+            <Avatar>
+              <img src={country.countryInfo.flag} className={classes.flag}></img>
+            </Avatar>
+          }
+          title={
+            <Typography variant="h5">
+              {country.country}
+            </Typography>
+          }
+        />
         <Divider />
         <CardContent>
           <Grid container className={classes.root}>
             <Grid className={classes.cardItem} item xs>
               <Typography color="textSecondary">Cases</Typography>
               <Typography variant="h5" component="h5">
-                {data.cases}
+                {country.cases}
               </Typography>
             </Grid>
             <Grid className={classes.cardItem} item xs>
               <Typography color="textSecondary">Deaths</Typography>
               <Typography variant="h5" component="h5">
-                {data.deaths}
-              </Typography>
-            </Grid>
-            <Grid className={classes.cardItem} item xs>
-              <Typography color="textSecondary">Recovered</Typography>
-              <Typography variant="h5" component="h5">
-                {data.recovered}
-              </Typography>
-            </Grid>
-            <Grid className={classes.cardItem} item xs>
-              <Typography color="textSecondary">Active</Typography>
-              <Typography variant="h5" component="h5">
-                {data.active}
+                {country.deaths}
               </Typography>
             </Grid>
             <Grid className={classes.cardItem} item xs>
               <Typography color="textSecondary">Today Cases</Typography>
               <Typography variant="h5" component="h5">
-                {data.todayCases}
+                {country.todayCases}
               </Typography>
             </Grid>
             <Grid className={classes.cardItem} item xs>
               <Typography color="textSecondary">Today Deaths</Typography>
               <Typography variant="h5" component="h5">
-                {data.todayDeaths}
+                {country.todayDeaths}
+              </Typography>
+            </Grid>
+            <Grid className={classes.cardItem} item xs>
+              <Typography color="textSecondary">Recovered</Typography>
+              <Typography variant="h5" component="h5">
+                {country.recovered}
+              </Typography>
+            </Grid>
+            <Grid className={classes.cardItem} item xs>
+              <Typography color="textSecondary">Active</Typography>
+              <Typography variant="h5" component="h5">
+                {country.active}
+              </Typography>
+            </Grid>
+            <Grid className={classes.cardItem} item xs>
+              <Typography color="textSecondary">Cases per one million</Typography>
+              <Typography variant="h5" component="h5">
+                {country.casesPerOneMillion}
               </Typography>
             </Grid>
           </Grid>
@@ -101,4 +107,4 @@ class SimpleCard extends React.Component {
   }
 }
 
-export default withStyles(useStyles)(SimpleCard);
+export default withStyles(useStyles)(CountryCard);

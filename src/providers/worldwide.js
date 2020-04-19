@@ -8,7 +8,7 @@ export async function get() {
         all = await axios.get(`${API_URL}/all`);
     } catch (e) {
         console.log(`Failed to fetch total: ${e.message}`, e);
-        return [];
+        return {};
     }
     return all.data;
 }
