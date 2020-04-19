@@ -84,7 +84,7 @@ const IndexPage = () => {
         const html = `
           <span style="width: ${circleSize}%; height: ${circleSize}%" class="icon-marker">
             <span class="icon-marker-tooltip">
-              <h2>${country} <img src=${flag}></h2>
+              <h2><img src=${flag}> ${country} </h2>
               <ul>
                 <li><strong>Confirmed:</strong> ${cases}</li>
                 <li><strong>Deaths:</strong> ${deaths}</li>
