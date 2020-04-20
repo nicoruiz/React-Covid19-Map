@@ -9,84 +9,84 @@ import AddIcon from '@material-ui/icons/Add';
 import SearchInput from 'components/dashboard/SearchInput';
 
 const useStyles = () => ({
-	root: {
-		flexGrow: 1,
-		marginLeft: 30,
-		marginRight: 30,
-		marginBottom: 10
-	},
-	loadMore: {
-		marginTop: 10
-	}
+  root: {
+    flexGrow: 1,
+    marginLeft: 30,
+    marginRight: 30,
+    marginBottom: 10
+  },
+  loadMore: {
+    marginTop: 10
+  }
 });
 
 class CountriesList extends React.Component {
-	state = {
-		countries: [],
-		filtered: [],
-		visible: 10
-	}
+  state = {
+    countries: [],
+    filtered: [],
+    visible: 10
+  }
 
-	componentDidMount() {
-		this.getCountries();
-	}
+  componentDidMount() {
+    this.getCountries();
+  }
 
-	getCountries = () => {
-		countriesProvider.get().then(res => {
-			this.setState({
-				countries: res,
-				filtered: res
-			});
-		});
-	};
+  getCountries = () => {
+    countriesProvider.get().then(res => {
+      this.setState({
+        countries: res,
+        filtered: res
+      });
+    });
+  };
 
-	onSearch = (event) => {
-		let value = event.target.value;
-		this.setState({
-			filtered: this.state.countries
-				.filter(c => c.country.toLowerCase()
-					.includes(value.toLowerCase()))
-		});
+  onSearch = (event) => {
+    let value = event.target.value;
+    this.setState({
+      filtered: this.state.countries
+        .filter(c => c.country.toLowerCase()
+          .includes(value.toLowerCase()))
+    });
 
-		
-	}
 
-	loadMore = () => {
-		this.setState({
-			visible: this.state.visible + 10
-		});
-	}
+  }
 
-	render() {
-		const { classes } = this.props;
+  loadMore = () => {
+    this.setState({
+      visible: this.state.visible + 10
+    });
+  }
 
-		return (
-			<>
-				{this.state.countries.length === 0 ?
-					<Spinner /> :
-					<div className={classes.root}>
-						<Grid container spacing={3}>
-							<SearchInput onSearch={(event) => this.onSearch(event)}/>
-							{this.state.filtered
-								.sort((x, y) => y.cases - x.cases)
-								.slice(0, this.state.visible)
-								.map((c, index) => (
-									<Grid key={index} item xs={12}>
-										<CountryCard country={c} />
-									</Grid>
-								))}
-							{ this.state.filtered.length > 0 ? 
-								<Button variant="contained" color="primary" onClick={this.loadMore} className={classes.root} startIcon={<AddIcon />}>
-									Load More
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <>
+        {this.state.countries.length === 0 ?
+          <Spinner /> :
+          <div className={classes.root}>
+            <Grid container spacing={3}>
+              <SearchInput onSearch={(event) => this.onSearch(event)} />
+              {this.state.filtered
+                .sort((x, y) => y.cases - x.cases)
+                .slice(0, this.state.visible)
+                .map((c, index) => (
+                  <Grid key={index} item xs={12}>
+                    <CountryCard country={c} />
+                  </Grid>
+                ))}
+              {this.state.filtered.length > 0 ?
+                <Button variant="contained" color="primary" onClick={this.loadMore} className={classes.root} startIcon={<AddIcon />}>
+                  Load More
 								</Button> :
-								<></>
-							}
-						</Grid>
-					</div>
-				}
-			</>
-		);
-	}
+                <></>
+              }
+            </Grid>
+          </div>
+        }
+      </>
+    );
+  }
 }
 
 export default withStyles(useStyles)(CountriesList);
