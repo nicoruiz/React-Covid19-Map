@@ -24,7 +24,7 @@ class CountriesList extends React.Component {
   state = {
     countries: [],
     filtered: [],
-    visible: 10
+    visible: 5
   }
 
   componentDidMount() {
@@ -53,7 +53,7 @@ class CountriesList extends React.Component {
 
   loadMore = () => {
     this.setState({
-      visible: this.state.visible + 10
+      visible: this.state.visible + 5
     });
   }
 
