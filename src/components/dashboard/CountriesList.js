@@ -14,9 +14,6 @@ const useStyles = () => ({
     marginLeft: 30,
     marginRight: 30,
     marginBottom: 10
-  },
-  loadMore: {
-    marginTop: 10
   }
 });
 
@@ -78,8 +75,8 @@ class CountriesList extends React.Component {
               {this.state.filtered.length > 0 ?
                 <Button variant="contained" color="primary" onClick={this.loadMore} className={classes.root} startIcon={<AddIcon />}>
                   Load More
-								</Button> :
-                <></>
+                </Button> 
+                : <></>                
               }
             </Grid>
           </div>

@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
+import CardItem from "components/CardItem";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import { Grid } from "@material-ui/core";
@@ -12,17 +13,16 @@ const useStyles = () => ({
   root: {
     flexGrow: 1,
   },
-  cardItem: {
-    flexGrow: 1,
-    padding: 5,
+  card: {
+    margin: 30,
   },
 });
 
 class SimpleCard extends React.Component {
   state = {
-      worldwide: {},
-      raised: false
-  }
+    worldwide: {},
+    raised: false,
+  };
 
   componentDidMount() {
     this.getWorldwide();
@@ -30,14 +30,14 @@ class SimpleCard extends React.Component {
 
   toggleRaised = () => {
     this.setState({
-      raised: !this.state.raised
+      raised: !this.state.raised,
     });
   };
 
   getWorldwide = () => {
-    worldwideProvider.get().then(res => {
+    worldwideProvider.get().then((res) => {
       this.setState({ worldwide: res });
-    })
+    });
   };
 
   render() {
@@ -48,7 +48,7 @@ class SimpleCard extends React.Component {
       <Card
         onMouseOver={this.toggleRaised}
         onMouseOut={this.toggleRaised}
-        className={classes.root}
+        className={(classes.root, classes.card)}
         raised={this.state.raised}
       >
         <CardHeader title="Total Worldwide" />
@@ -57,43 +57,25 @@ class SimpleCard extends React.Component {
         </Typography>
         <Divider />
         <CardContent>
-          <Grid container className={classes.root}>
-            <Grid className={classes.cardItem} item xs>
-              <Typography color="textSecondary">Cases</Typography>
-              <Typography variant="h5" component="h5">
-                {data.cases}
-              </Typography>
-            </Grid>
-            <Grid className={classes.cardItem} item xs>
-              <Typography color="textSecondary">Deaths</Typography>
-              <Typography variant="h5" component="h5">
-                {data.deaths}
-              </Typography>
-            </Grid>
-            <Grid className={classes.cardItem} item xs>
-              <Typography color="textSecondary">Recovered</Typography>
-              <Typography variant="h5" component="h5">
-                {data.recovered}
-              </Typography>
-            </Grid>
-            <Grid className={classes.cardItem} item xs>
-              <Typography color="textSecondary">Active</Typography>
-              <Typography variant="h5" component="h5">
-                {data.active}
-              </Typography>
-            </Grid>
-            <Grid className={classes.cardItem} item xs>
-              <Typography color="textSecondary">Today Cases</Typography>
-              <Typography variant="h5" component="h5">
-                {data.todayCases}
-              </Typography>
-            </Grid>
-            <Grid className={classes.cardItem} item xs>
-              <Typography color="textSecondary">Today Deaths</Typography>
-              <Typography variant="h5" component="h5">
-                {data.todayDeaths}
-              </Typography>
-            </Grid>
+          <Grid container className={classes.root} spacing={3}>
+            <CardItem title="Confirmed" data={data.cases} />
+            <CardItem title="Today Cases" data={data.todayCases} />
+            <CardItem title="Deaths" data={data.deaths} />
+            <CardItem title="Today Deaths" data={data.todayDeaths} />
+            <CardItem title="Recovered" data={data.recovered} />
+            <CardItem title="Active" data={data.active} />
+            <CardItem
+              title="Cases per million"
+              data={data.casesPerOneMillion}
+            />
+            <CardItem
+              title="Deaths per million"
+              data={data.deathsPerOneMillion}
+            />
+            <CardItem
+              title="Tests per million"
+              data={data.testsPerOneMillion}
+            />
           </Grid>
         </CardContent>
       </Card>

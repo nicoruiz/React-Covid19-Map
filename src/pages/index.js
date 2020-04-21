@@ -15,7 +15,7 @@ const LOCATION = {
   lng: 0,
 };
 const CENTER = [LOCATION.lat, LOCATION.lng];
-const DEFAULT_ZOOM = 3;
+const DEFAULT_ZOOM = 2;
 
 const IndexPage = () => {
   const [mapData, setMapData] = useState([]);
@@ -62,11 +62,10 @@ const IndexPage = () => {
     const geoJsonLayers = new L.GeoJSON(geoJson, {
       pointToLayer: (feature = {}, latlng) => {
         const { properties = {} } = feature;
-        let updatedFormatted;
         let casesString;
         let circleSize;
 
-        const { country, updated, cases, deaths, recovered, flag } = properties;
+        const { country, tests, cases, deaths, casesPerOneMillion, deathsPerOneMillion, testsPerOneMillion, flag } = properties;
 
         casesString = `${cases}`;
 
@@ -74,12 +73,8 @@ const IndexPage = () => {
           casesString = `${casesString.slice(0, -3)}k+`;
         }
 
-        if (updated) {
-          updatedFormatted = new Date(updated).toLocaleString();
-        }
-
         // Calculate cirle size
-        circleSize = Math.sqrt(cases) * 1.5;
+        circleSize = Math.sqrt(cases);
 
         const html = `
           <span style="width: ${circleSize}%; height: ${circleSize}%" class="icon-marker">
@@ -88,8 +83,10 @@ const IndexPage = () => {
               <ul>
                 <li><strong>Confirmed:</strong> ${cases}</li>
                 <li><strong>Deaths:</strong> ${deaths}</li>
-                <li><strong>Recovered:</strong> ${recovered}</li>
-                <li><strong>Last Update:</strong> ${updatedFormatted}</li>
+                <li><strong>Cases per million:</strong> ${casesPerOneMillion}</li>
+                <li><strong>Deaths per million:</strong> ${deathsPerOneMillion}</li>
+                <li><strong>Tests:</strong> ${tests}</li>
+                <li><strong>Tests per million:</strong> ${testsPerOneMillion}</li>
               </ul>
             </span>
             ${casesString}
@@ -128,7 +125,7 @@ const IndexPage = () => {
         <Spinner /> :
         <>
           <Map {...mapSettings}></Map>
-          <Container type="content" className="text-center home-start">
+          <Container className="text-center">
             <TotalCard />
           </Container>
         </>
