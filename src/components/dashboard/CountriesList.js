@@ -23,7 +23,7 @@ class CountriesList extends React.Component {
   state = {
     countries: [],
     filtered: [],
-    visible: 5
+    visible: 8
   }
 
   componentDidMount() {
@@ -46,13 +46,11 @@ class CountriesList extends React.Component {
         .filter(c => c.country.toLowerCase()
           .includes(value.toLowerCase()))
     });
-
-
   }
 
   loadMore = () => {
     this.setState({
-      visible: this.state.visible + 5
+      visible: this.state.visible + 8
     });
   }
 
