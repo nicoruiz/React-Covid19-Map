@@ -7,13 +7,15 @@ import * as countriesProvider from "../../providers/countries.js";
 import Spinner from "../Spinner.js";
 import AddIcon from '@material-ui/icons/Add';
 import SearchInput from 'components/dashboard/SearchInput';
+import Container from '@material-ui/core/Container';
 
 const useStyles = () => ({
   root: {
+    flexGrow: 1
+  },
+  loadMoreButton: {
     flexGrow: 1,
-    marginLeft: 30,
-    marginRight: 30,
-    marginBottom: 10
+    margin: 30
   }
 });
 
@@ -58,7 +60,7 @@ class CountriesList extends React.Component {
     const { classes } = this.props;
 
     return (
-      <>
+      <Container fixed>
         {this.state.countries.length === 0 ?
           <Spinner /> :
           <div className={classes.root}>
@@ -73,7 +75,7 @@ class CountriesList extends React.Component {
                   </Grid>
                 ))}
               {this.state.filtered.length > 0 ?
-                <Button variant="contained" color="primary" onClick={this.loadMore} className={classes.root} startIcon={<AddIcon />}>
+                <Button variant="contained" color="primary" onClick={this.loadMore} className={classes.loadMoreButton} startIcon={<AddIcon />}>
                   Load More
                 </Button> 
                 : <></>                
@@ -81,7 +83,7 @@ class CountriesList extends React.Component {
             </Grid>
           </div>
         }
-      </>
+      </Container>
     );
   }
 }
