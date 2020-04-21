@@ -1,7 +1,6 @@
 import favicon from '../../favicon.ico';
 import React from 'react';
 import Helmet from 'react-helmet';
-
 import Layout from 'components/Layout';
 import CountriesList from 'components/dashboard/CountriesList';
 
