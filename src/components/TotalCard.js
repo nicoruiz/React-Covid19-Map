@@ -14,8 +14,10 @@ const useStyles = () => ({
     flexGrow: 1,
   },
   card: {
-    margin: 30,
-  },
+    flexGrow: 1,
+    marginTop: 20,
+    marginBottom: 20
+  }
 });
 
 class SimpleCard extends React.Component {
@@ -48,7 +50,7 @@ class SimpleCard extends React.Component {
       <Card
         onMouseOver={this.toggleRaised}
         onMouseOut={this.toggleRaised}
-        className={(classes.root, classes.card)}
+        className={classes.card}
         raised={this.state.raised}
       >
         <CardHeader title="Total Worldwide" />

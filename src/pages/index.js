@@ -9,7 +9,6 @@ import "typeface-roboto";
 import Spinner from "../components/Spinner";
 import * as countriesProvider from "../providers/countries.js";
 import Container from '@material-ui/core/Container';
-import { Grid } from "@material-ui/core";
 
 const LOCATION = {
   lat: 0,
@@ -127,10 +126,8 @@ const IndexPage = () => {
         <>
           <Map {...mapSettings}></Map>
           <Container fixed className="text-center">
-            <Grid container spacing={4}>
-              <TotalCard />
-            </Grid>            
-          </Container>
+            <TotalCard />
+          </Container>          
         </>
       }
     </Layout>
