@@ -1,12 +1,12 @@
 import React from 'react';
 
-import Container from 'components/Container';
+import Container from '@material-ui/core/Container';
 
 const Footer = () => {
   return (
     <footer>
       <Container>
-        <p>&copy; { new Date().getFullYear() }, Covid-19 Map Site</p>
+        <p>&copy; { new Date().getFullYear() }, Covid-19 App</p>
       </Container>
     </footer>
   );

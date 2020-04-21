@@ -1,5 +1,4 @@
 import favicon from '../../favicon.ico';
-import Container from "components/Container";
 import Layout from "components/Layout";
 import Map from "components/Map";
 import TotalCard from "components/TotalCard";
@@ -9,6 +8,8 @@ import Helmet from "react-helmet";
 import "typeface-roboto";
 import Spinner from "../components/Spinner";
 import * as countriesProvider from "../providers/countries.js";
+import Container from '@material-ui/core/Container';
+import { Grid } from "@material-ui/core";
 
 const LOCATION = {
   lat: 0,
@@ -125,8 +126,10 @@ const IndexPage = () => {
         <Spinner /> :
         <>
           <Map {...mapSettings}></Map>
-          <Container className="text-center">
-            <TotalCard />
+          <Container fixed className="text-center">
+            <Grid container spacing={4}>
+              <TotalCard />
+            </Grid>            
           </Container>
         </>
       }

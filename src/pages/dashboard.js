@@ -1,3 +1,4 @@
+import favicon from '../../favicon.ico';
 import React from 'react';
 import Helmet from 'react-helmet';
 
@@ -8,7 +9,8 @@ const Dashboard = () => {
   return (
     <Layout pageName="dashboard">
       <Helmet>
-        <title>Dashboard</title>
+        <title>Covid-19 Dashboard</title>
+        <link rel="shortcut icon" type="image/png" href={favicon} />
       </Helmet>
       <CountriesList />
     </Layout>

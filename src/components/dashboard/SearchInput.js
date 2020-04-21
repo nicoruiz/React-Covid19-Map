@@ -21,7 +21,7 @@ const SearchInput = (props) => {
             <SearchIcon />
           </Grid>
           <Grid noValidate autoComplete="off" item>
-            <TextField id="standard-basic" label="Search" onChange={props.onSearch} />
+            <TextField id="standard-basic" label="Search Country" onChange={props.onSearch} />
           </Grid>
         </Grid>
       </div>
