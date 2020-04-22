@@ -28,9 +28,9 @@ const Header = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            Coronavirus (COVID-19)
+            Covid-19
           </Typography>
-          <Button color="inherit" startIcon={<PublicIcon />} className={classes.menuButton}>
+          <Button color="inherit" startIcon={<PublicIcon />}>
             <Link to="/">Map</Link>
           </Button>
           <Button color="inherit" startIcon={<ViewListIcon />}>
