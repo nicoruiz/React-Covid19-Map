@@ -30,12 +30,13 @@ const Header = () => {
           <Typography variant="h6" className={classes.title}>
             Covid-19
           </Typography>
-          <Button color="inherit" startIcon={<PublicIcon />}>
-            <Link to="/">Map</Link>
-          </Button>
-          <Button color="inherit" startIcon={<ViewListIcon />}>
-            <Link to="/dashboard/">Dashboard</Link>
-          </Button>
+          
+          <Link to="/">
+            <Button color="inherit" startIcon={<PublicIcon />}>Map</Button>
+          </Link>          
+          <Link to="/dashboard/">
+            <Button color="inherit" startIcon={<ViewListIcon />}>Dashboard</Button>
+          </Link>          
         </Toolbar>
       </AppBar>
     </div>
