@@ -8,6 +8,7 @@ import Spinner from "../Spinner.js";
 import AddIcon from '@material-ui/icons/Add';
 import SearchInput from 'components/dashboard/SearchInput';
 import Container from '@material-ui/core/Container';
+import OrderBySelect from 'components/dashboard/OrderBySelect';
 
 const useStyles = () => ({
   root: {
@@ -23,7 +24,8 @@ class CountriesList extends React.Component {
   state = {
     countries: [],
     filtered: [],
-    visible: 8
+    visible: 8,
+    criteriaSort: "cases" 
   }
 
   componentDidMount() {
@@ -54,18 +56,51 @@ class CountriesList extends React.Component {
     });
   }
 
+  onSort = (selectedCriteria) => {
+    //let selectedCriteria = event.target.value;
+    this.setState({
+      criteriaSort: selectedCriteria
+    });
+  }
+
+  buildSelectList = () => {
+    return [
+      {value: "cases", text: "Confirmed"},
+      {value: "todayCases", text: "Today Cases"},
+      {value: "deaths", text: "Deaths"},
+      {value: "todayDeaths", text: "Today Deaths"},
+      {value: "recovered", text: "Recovered"},
+      {value: "active", text: "Active"},
+      {value: "casesPerOneMillion", text: "Cases p/ million"},
+      {value: "deathsPerOneMillion", text: "Deaths p/ million"},
+      {value: "tests", text: "Tests"},
+      {value: "testsPerOneMillion", text: "Tests p/ million"}
+    ]
+  }
+
   render() {
-    const { classes } = this.props;
+    const { classes } = this.props; 
+    const criteriaSortList = this.buildSelectList();
 
     return (
       <Container fixed>
         {this.state.countries.length === 0 ?
           <Spinner /> :
           <div className={classes.root}>
+            <Grid container spacing={1}>
+              <Grid item xs={6} sm={6}>
+                <SearchInput onSearch={(event) => this.onSearch(event)} />
+              </Grid>
+              <Grid item xs={6} sm={3}>
+                <OrderBySelect 
+                  criteriaSort={criteriaSortList} 
+                  onSort={this.onSort}>              
+                </OrderBySelect>
+              </Grid>
+            </Grid>
             <Grid container spacing={3}>
-              <SearchInput onSearch={(event) => this.onSearch(event)} />
               {this.state.filtered
-                .sort((x, y) => y.cases - x.cases)
+                .sort((x, y) => y[this.state.criteriaSort] - x[this.state.criteriaSort])
                 .slice(0, this.state.visible)
                 .map((c, index) => (
                   <Grid key={index} item xs={12}>
